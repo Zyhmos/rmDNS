@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "1tM95fZgy38O5gLvy32OAD76jITBAFDl9scksZBRR2HpJBn91NqSlgN9zgjtK4ExCK42J8TITrLOkNv6LFWuJA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\zyhmr\\source\\repos\\rmDNS\\Shop\\Shop\\Shop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\zyhmr\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
