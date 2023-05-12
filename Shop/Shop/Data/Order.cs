@@ -43,5 +43,18 @@ namespace Shop.Data
         {
             Date = value;
         }
+
+        public double TotalSum()
+        {
+            return Math.Round(Amount * 98.99 - (Amount * 98.99 * Discounter() / 100), 2);
+        }
+
+        public int Discounter()
+        {
+            int disc = 0;
+            if (Amount >= 50) { disc = 15; }
+            else if (Amount >= 10) { disc = 5; }
+            return disc;
+        }
     }
 }

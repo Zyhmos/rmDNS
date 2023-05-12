@@ -26,12 +26,14 @@ namespace Shop
     {
         public string url = "https://localhost:7205/api/shop/";
         public DataTable dt;
+        private Order newOrder;
 
         public MainWindow()
         {
             InitializeComponent();
             //Should be using serverside time. ¯\_(ツ)_/¯
             dpDate.SelectedDate = DateTime.Now;
+            newOrder = new Order();
             dt = new DataTable();
             dt.Columns.Add(new DataColumn("Name", typeof(String)));
             dt.Columns.Add(new DataColumn("Address", typeof(String)));
@@ -57,11 +59,11 @@ namespace Shop
                 tbAmount.Text = "1";
                 tbAmount.SelectAll();
             }
-            int amount = System.Convert.ToInt32(tbAmount.Text);
-            int disc = Discounter(amount);
+            newOrder.Amount = System.Convert.ToInt32(tbAmount.Text);
 
-            lblTotalCost.Content = String.Format("Total cost: {0}\n(" + disc + " % discount!)",
-                TotalSum(amount));
+            lblTotalCost.Content = String.Format("Total cost: {0}\n(" + 
+                newOrder.Discounter() + " % discount!)",
+                newOrder.TotalSum());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -118,7 +120,7 @@ namespace Shop
                 dr["Address"] = order.Person.Address;
                 dr["amount"] = order.Amount;
                 dr["Date"] = order.Date;
-                dr["Total"] = TotalSum(order.Amount);
+                dr["Total"] = order.TotalSum();
                 dt.Rows.Add(dr);
             }
             dtOrders.Columns.Clear();
@@ -126,20 +128,6 @@ namespace Shop
             dtOrders.AutoGenerateColumns = true;
             dtOrders.CanUserAddRows = false;
 
-        }
-
-
-        private double TotalSum(int amount)
-        {
-            return Math.Round(amount * 98.99 - (amount * 98.99 * Discounter(amount) / 100), 2);
-        }
-
-        private int Discounter(int amount)
-        {
-            int disc = 0;
-            if (amount >= 50) { disc = 15; }
-            else if (amount >= 10) { disc = 5; }
-            return disc;
         }
     }
 }
